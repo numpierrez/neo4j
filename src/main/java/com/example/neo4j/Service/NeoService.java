@@ -1,8 +1,11 @@
 package com.example.neo4j.Service;
 
 
+import com.example.neo4j.model.Movie;
+import com.example.neo4j.repository.MovieRepository;
 import lombok.AllArgsConstructor;
 import org.neo4j.driver.*;
+import org.neo4j.driver.internal.shaded.reactor.core.publisher.Mono;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,6 +15,8 @@ import java.util.List;
 public
 class NeoService {
     private final Driver driver;
+
+    private final MovieRepository movieRepository;
 
     public List<String> getActors(){
         return findAllActors();
@@ -44,5 +49,9 @@ class NeoService {
             return session.run(query)
                     .list(r -> r.get("p").asNode().get("name").asString());
         }
+    }
+
+    public Movie createOrupdateMovie(Movie movie) {
+       return this.movieRepository.save(movie);
     }
 }
