@@ -16,3 +16,10 @@ http://localhost:8080/neo4j/actors
 Crear query
 http://localhost:8080/neo4j/query/{}
 
+Post/Put Movie
+curl --location --request PUT 'http://localhost:8080/neo4j/movie' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "title": "NUEVA PELICULA NO SQL",
+  "description": "prueba"
+}'
