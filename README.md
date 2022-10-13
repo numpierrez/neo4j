@@ -23,3 +23,8 @@ curl --location --request PUT 'http://localhost:8080/neo4j/movie' \
   "title": "NUEVA PELICULA NO SQL",
   "description": "prueba"
 }'
+
+
+Coleccion de postman:
+
+https://www.getpostman.com/collections/d5002608c7bf83ba5e67
