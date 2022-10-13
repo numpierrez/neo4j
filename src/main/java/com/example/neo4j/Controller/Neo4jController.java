@@ -3,7 +3,10 @@ package com.example.neo4j.Controller;
 
 import com.example.neo4j.Service.NeoService;
 import com.example.neo4j.model.Movie;
+import com.example.neo4j.model.Person;
+import com.example.neo4j.repository.MovieRepository;
 import lombok.AllArgsConstructor;
+import org.neo4j.driver.internal.shaded.reactor.core.publisher.Flux;
 import org.neo4j.driver.internal.shaded.reactor.core.publisher.Mono;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -42,4 +45,20 @@ public class Neo4jController {
     public Movie createOrUpdate(@RequestBody Movie movie){
          return this.neoService.createOrupdateMovie(movie);
     }
+
+    @PutMapping("/actor")
+    public Person createOrUpdateActor(@RequestBody Person person){
+        return this.neoService.createOrupdatePerson(person);
+    }
+
+    @PostMapping("/{movie}/{actor}")
+    public void addActorToMovie(@PathVariable String movie, @PathVariable String actor){
+        this.neoService.addPersonToMove(movie, actor);
+    }
+    @GetMapping("/movie/{movie}")
+    public ResponseEntity getMovieDetails(@PathVariable String movie){
+        return  ResponseEntity.ok(this.neoService.getMovieDetails(movie));
+    }
+
+
 }

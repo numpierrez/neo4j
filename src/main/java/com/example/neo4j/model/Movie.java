@@ -1,5 +1,6 @@
 package com.example.neo4j.model;
 
+import lombok.Data;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 import static org.springframework.data.neo4j.core.schema.Relationship.Direction.INCOMING;
 
+@Data
 @Node("Movie")
 public class Movie {
     @Id
@@ -24,5 +26,4 @@ public class Movie {
         this.title = title;
         this.description = description;
     }
-    //Getters omitted for brevity
 }
