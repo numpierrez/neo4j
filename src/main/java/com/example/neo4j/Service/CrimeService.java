@@ -32,6 +32,20 @@ class CrimeService {
         }
     }
 
+    public String getPersonSByCrime(String crime) {
+        try (Session session = driver.session()) {
+            String query = String.format("MATCH path = (:Officer {badge_no: '26-5234182'})<-[:INVESTIGATED_BY]-(:Crime {type: '%s'})<-[:PARTY_TO]-(:Person)-[:KNOWS*..3]-(:Person)-[:PARTY_TO]->(:Crime {type: 'Drugs'}) RETURN path", crime);
+            return mapResponseToString(session, query);
+        }
+    }
+
+    public String getVulnerabilityConections() {
+        try (Session session = driver.session()) {
+            String query ="MATCH (p:Person)-[:KNOWS]-(friend)-[:PARTY_TO]->(:Crime) WHERE NOT (p:Person)-[:PARTY_TO]->(:Crime) WITH p, count(distinct friend) AS dangerousFriends ORDER BY dangerousFriends DESC LIMIT 5 WITH COLLECT (p) AS people UNWIND people AS p1 UNWIND people AS p2 WITH * WHERE id(p1) <> id (p2) MATCH path = shortestpath((p1)-[:KNOWS*]-(p2)) RETURN path";
+            return mapResponseToString(session, query);
+        }
+    }
+
     private String mapResponseToString(Session session, String query){
         List<List<Pair<String, Value>>> list = new ArrayList<>();
         for (List<Pair<String, Value>> pairs : session.run(query).list(a -> a.fields())) {

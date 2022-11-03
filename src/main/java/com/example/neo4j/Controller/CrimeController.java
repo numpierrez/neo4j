@@ -30,4 +30,13 @@ public class CrimeController
         return crimeService.getDengerousPersonsByFriend(frinedId);
     }
 
+    @GetMapping(path ="/vulnerabilityConections", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getVulnerabilityConections(){
+        return crimeService.getVulnerabilityConections();
+    }
+
+    @GetMapping(path ="/personsByCrime/{crime}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getPersonSByCrime(@PathVariable String crime){
+        return crimeService.getPersonSByCrime(crime);
+    }
 }
