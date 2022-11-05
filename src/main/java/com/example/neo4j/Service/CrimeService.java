@@ -1,6 +1,12 @@
 package com.example.neo4j.Service;
 
 
+import com.example.neo4j.model.Crime;
+import com.example.neo4j.model.Movie;
+import com.example.neo4j.model.Person;
+import com.example.neo4j.repository.CrimeRepository;
+import com.example.neo4j.repository.MovieRepository;
+import com.example.neo4j.repository.PersonRepository;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import org.neo4j.driver.*;
@@ -10,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -17,7 +24,9 @@ import java.util.stream.Collectors;
 public
 class CrimeService {
     private final Driver driver;
+    private final CrimeRepository crimeRepository;
 
+    private final PersonRepository personRepository;
     public String getCrimeByAddress(String address, String postcode) {
         try (Session session = driver.session()) {
             String query = String.format("MATCH (l:Location {address: '%s', postcode: '%s'}) WITH point(l) AS corrie MATCH (x:Location)-[:HAS_POSTCODE]->(p:PostCode),(x)<-[:OCCURRED_AT]-(c:Crime) WITH x, p, c, point.distance(point(x), corrie) AS distance WHERE distance < 500 RETURN x.address AS address, p.code AS postcode, count(c) AS crime_total, collect(distinct(c.type)) AS crime_type, distance ORDER BY distance LIMIT 10", address, postcode);
@@ -56,4 +65,13 @@ class CrimeService {
     }
 
 
+    public Object addCrime(Crime crime) {
+        try{
+            return this.crimeRepository.save(crime);
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return ex;
+        }
+    }
 }

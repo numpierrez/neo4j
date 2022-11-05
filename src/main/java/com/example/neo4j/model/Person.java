@@ -11,12 +11,8 @@ import java.time.LocalDateTime;
 @Data
 @Node("Person")
 public class Person {
+    private String name;
     @Id
-    private final String name;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDateTime born;
-    public Person(LocalDateTime born, String name) {
-        this.born = born;
-        this.name = name;
-    }
+    private String nhs_no;
+    private String surname;
 }

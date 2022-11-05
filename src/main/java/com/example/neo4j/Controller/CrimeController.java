@@ -1,6 +1,8 @@
 package com.example.neo4j.Controller;
 
 import com.example.neo4j.Service.CrimeService;
+import com.example.neo4j.model.Crime;
+import com.example.neo4j.model.Person;
 import lombok.AllArgsConstructor;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;
@@ -38,4 +40,10 @@ public class CrimeController
     public ResponseEntity<String> getPersonSByCrime(@PathVariable String crime){
         return ResponseEntity.ok(crimeService.getPersonSByCrime(crime));
     }
+
+    @PostMapping(path ="", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity addCrime(@RequestBody Crime crime){
+        return ResponseEntity.ok(crimeService.addCrime(crime));
+    }
+
 }
