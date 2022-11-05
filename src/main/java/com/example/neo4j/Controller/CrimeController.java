@@ -1,6 +1,5 @@
 package com.example.neo4j.Controller;
 
-
 import com.example.neo4j.Service.CrimeService;
 import lombok.AllArgsConstructor;
 import org.neo4j.driver.Record;
@@ -26,17 +25,17 @@ public class CrimeController
     }
 
     @GetMapping(path ="/dangerousPersonsByFriend/{frinedId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getDengerousPersonsByFriend(@PathVariable String frinedId){
-        return crimeService.getDengerousPersonsByFriend(frinedId);
+    public ResponseEntity<String> getDengerousPersonsByFriend(@PathVariable String frinedId){
+        return ResponseEntity.ok(crimeService.getDengerousPersonsByFriend(frinedId));
     }
 
     @GetMapping(path ="/vulnerabilityConections", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getVulnerabilityConections(){
-        return crimeService.getVulnerabilityConections();
+    public ResponseEntity<String> getVulnerabilityConections(){
+        return ResponseEntity.ok(crimeService.getVulnerabilityConections());
     }
 
     @GetMapping(path ="/personsByCrime/{crime}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getPersonSByCrime(@PathVariable String crime){
-        return crimeService.getPersonSByCrime(crime);
+    public ResponseEntity<String> getPersonSByCrime(@PathVariable String crime){
+        return ResponseEntity.ok(crimeService.getPersonSByCrime(crime));
     }
 }

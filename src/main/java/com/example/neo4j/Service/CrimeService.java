@@ -27,14 +27,14 @@ class CrimeService {
 
     public String getDengerousPersonsByFriend(String dni) {
         try (Session session = driver.session()) {
-            String query = String.format("MATCH (anne:Person {nhs_no: '%s'})-[k:KNOWS]-(friend)-[pt:PARTY_TO]->(c:Crime), (anne)-[ca1:CURRENT_ADDRESS]->(aAddress)-[lia1:LOCATION_IN_AREA]->(area), (friend)-[ca2:CURRENT_ADDRESS]->(fAddress)-[lia2:LOCATION_IN_AREA]->(area) RETURN *", dni);
+            String query = String.format("MATCH (anne:Person {nhs_no: '%s' })-[k:KNOWS]-(friend)-[pt:PARTY_TO]->(c:Crime), (anne)-[ca1:CURRENT_ADDRESS]->(aAddress)-[lia1:LOCATION_IN_AREA]->(area), (friend)-[ca2:CURRENT_ADDRESS]->(fAddress)-[lia2:LOCATION_IN_AREA]->(area) RETURN *", dni);
             return mapResponseToString(session, query);
         }
     }
 
     public String getPersonSByCrime(String crime) {
         try (Session session = driver.session()) {
-            String query = String.format("MATCH path = (:Officer {badge_no: '26-5234182'})<-[:INVESTIGATED_BY]-(:Crime {type: '%s'})<-[:PARTY_TO]-(:Person)-[:KNOWS*..3]-(:Person)-[:PARTY_TO]->(:Crime {type: 'Drugs'}) RETURN path", crime);
+            String query = String.format("MATCH path = (:Officer)<-[:INVESTIGATED_BY]-(:Crime {type: '%s'})<-[:PARTY_TO]-(:Person)-[:KNOWS*..3]-(:Person)-[:PARTY_TO]->(:Crime {type: '%s'}) RETURN path", crime, crime);
             return mapResponseToString(session, query);
         }
     }
