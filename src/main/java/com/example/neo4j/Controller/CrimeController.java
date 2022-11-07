@@ -2,16 +2,10 @@ package com.example.neo4j.Controller;
 
 import com.example.neo4j.Service.CrimeService;
 import com.example.neo4j.model.Crime;
-import com.example.neo4j.model.Person;
 import lombok.AllArgsConstructor;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.util.Pair;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/crime/")

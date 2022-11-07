@@ -2,22 +2,16 @@ package com.example.neo4j.Service;
 
 
 import com.example.neo4j.model.Crime;
-import com.example.neo4j.model.Movie;
-import com.example.neo4j.model.Person;
 import com.example.neo4j.repository.CrimeRepository;
-import com.example.neo4j.repository.MovieRepository;
 import com.example.neo4j.repository.PersonRepository;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import org.neo4j.driver.*;
-import org.neo4j.driver.Record;
 import org.neo4j.driver.util.Pair;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
