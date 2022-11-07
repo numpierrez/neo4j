@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "a732072e-d582-4d3d-b895-1e26c82b5807",
+		"name": "Crimenes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24276073"
+	},
+	"item": [
+		{
+			"name": "Crimen",
+			"item": [
+				{
+					"name": "1 - Crímenes cerca de una dirección particular",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/crime/address/:address/postcode/:postCode",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"crime",
+								"address",
+								":address",
+								"postcode",
+								":postCode"
+							],
+							"variable": [
+								{
+									"key": "address",
+									"value": "1 Coronation Street"
+								},
+								{
+									"key": "postCode",
+									"value": "M5 3RW"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 - Personas relacionadas con determinado tipo de crimen",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/crime/personsByCrime/:crime",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"crime",
+								"personsByCrime",
+								":crime"
+							],
+							"variable": [
+								{
+									"key": "crime",
+									"value": "Drugs"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Personas peligrosas conocidas de una determinada persona",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/crime/dangerousPersonsByFriend/:frinedId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"crime",
+								"dangerousPersonsByFriend",
+								":frinedId"
+							],
+							"variable": [
+								{
+									"key": "frinedId",
+									"value": "804-54-6976"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4 - Conexiones entre personas vulnerables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/crime/vulnerabilityConections",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"crime",
+								"vulnerabilityConections"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5 - Alta de nuevo crimen",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"2f6342cc-207d-42d1-8d2a-905da526587f\",\r\n    \"date\": \"12/12/2000\",\r\n    \"last_outcome\": \"Unable to prosecute suspect\",\r\n    \"type\": \"Drugs\",\r\n    \"person\": [{\r\n        \"name\": \"Pepito\",\r\n        \"nhs_no\": \"879-22-8665\",\r\n        \"surname\" :\"pepe\"\r\n    }],\r\n    \"officer\": [{\r\n        \"name\": \"oficial\",\r\n        \"nhs_no\": \"26-5234182\",\r\n        \"surname\" :\"ofi\"\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/crime/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"crime",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
