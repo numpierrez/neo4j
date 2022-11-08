@@ -1,8 +1,5 @@
-FROM openjdk:11
-WORKDIR /app/
-
-# Copiamos el JAR de nuestra aplicación a la imagen Docker
-COPY target/Neo4jnosql-0.0.1-SNAPSHOT.jar .
-
-# Corremos el archivo JAR
-CMD ["java", "-cp", "jNeo4jnosql-0.0.1-SNAPSHOT.jar", "Neo4jApplication"]
+FROM openjdk:8
+MAINTAINER myNAME
+COPY target/Neo4jnosql-0.0.1-SNAPSHOT.jar  /home/testprj-1.0-SNAPSHOT.jar
+EXPOSE 8080
+CMD ["java","-jar","/home/testprj-1.0-SNAPSHOT.jar"]
